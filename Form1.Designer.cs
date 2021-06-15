@@ -48,6 +48,7 @@
             this.Address = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Instruction = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Hex = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lbl_ram = new System.Windows.Forms.Label();
             this.form1BindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.datagrid_ram)).BeginInit();
@@ -56,7 +57,7 @@
             // 
             // txt_code
             // 
-            this.txt_code.Font = new System.Drawing.Font("SimSun-ExtB", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_code.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_code.Location = new System.Drawing.Point(27, 81);
             this.txt_code.Multiline = true;
             this.txt_code.Name = "txt_code";
@@ -101,21 +102,24 @@
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(147, 26);
+            this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(200, 26);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItem_Click);
             // 
             // openFileToolStripMenuItem
             // 
             this.openFileToolStripMenuItem.Name = "openFileToolStripMenuItem";
-            this.openFileToolStripMenuItem.Size = new System.Drawing.Size(147, 26);
+            this.openFileToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+            this.openFileToolStripMenuItem.Size = new System.Drawing.Size(200, 26);
             this.openFileToolStripMenuItem.Text = "Open File";
             this.openFileToolStripMenuItem.Click += new System.EventHandler(this.OpenFileToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(147, 26);
+            this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(200, 26);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
@@ -159,11 +163,11 @@
             this.Instruction,
             this.Hex});
             this.datagrid_ram.GridColor = System.Drawing.SystemColors.ActiveCaption;
-            this.datagrid_ram.Location = new System.Drawing.Point(562, 81);
+            this.datagrid_ram.Location = new System.Drawing.Point(718, 81);
             this.datagrid_ram.Name = "datagrid_ram";
             this.datagrid_ram.ReadOnly = true;
             this.datagrid_ram.RowTemplate.Height = 24;
-            this.datagrid_ram.Size = new System.Drawing.Size(604, 622);
+            this.datagrid_ram.Size = new System.Drawing.Size(448, 622);
             this.datagrid_ram.TabIndex = 6;
             this.datagrid_ram.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView1_CellContentClick);
             // 
@@ -191,6 +195,16 @@
             this.Hex.Name = "Hex";
             this.Hex.ReadOnly = true;
             // 
+            // lbl_ram
+            // 
+            this.lbl_ram.AutoSize = true;
+            this.lbl_ram.Location = new System.Drawing.Point(862, 44);
+            this.lbl_ram.Name = "lbl_ram";
+            this.lbl_ram.Size = new System.Drawing.Size(38, 17);
+            this.lbl_ram.TabIndex = 7;
+            this.lbl_ram.Text = "RAM";
+            this.lbl_ram.Click += new System.EventHandler(this.Label1_Click_2);
+            // 
             // form1BindingSource
             // 
             this.form1BindingSource.DataSource = typeof(BasicCompiuter.Form1);
@@ -200,6 +214,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1178, 749);
+            this.Controls.Add(this.lbl_ram);
             this.Controls.Add(this.datagrid_ram);
             this.Controls.Add(this.lbl_current_file_name);
             this.Controls.Add(this.lbl_file_name);
@@ -207,6 +222,8 @@
             this.Controls.Add(this.lbl_code);
             this.Controls.Add(this.txt_code);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.MaximumSize = new System.Drawing.Size(1200, 800);
+            this.MinimumSize = new System.Drawing.Size(1200, 800);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Basic Computer";
@@ -240,6 +257,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Address;
         private System.Windows.Forms.DataGridViewTextBoxColumn Instruction;
         private System.Windows.Forms.DataGridViewTextBoxColumn Hex;
+        private System.Windows.Forms.Label lbl_ram;
     }
 }
 

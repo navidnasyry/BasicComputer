@@ -58,7 +58,7 @@ namespace BasicCompiuter
                 saveFileDialog2.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
                 saveFileDialog2.FilterIndex = 2;
                 //saveFileDialog2.CheckFileExists = true;
-                saveFileDialog2.CheckPathExists = true;
+                //saveFileDialog2.CheckPathExists = true;
 
                 
 
@@ -125,6 +125,11 @@ namespace BasicCompiuter
         }
 
         private void DataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void Label1_Click_2(object sender, EventArgs e)
         {
 
         }
