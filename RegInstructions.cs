@@ -23,6 +23,7 @@ namespace BasicCompiuter
         public const string HLT_code = "7001";
 
 
+
         public static bool CLA_instruction()
         {
             REG_AC = 0;
@@ -62,6 +63,56 @@ namespace BasicCompiuter
         }
 
 
+        public static bool CIR_instruction()
+        {
+            byte right_bit = 0;
+            ushort add_e = 0;
+
+            //is last bit 1 ?
+            if (REG_AC % 2 == 1)
+            {
+                right_bit = 1;
+            }
+
+            // is E 1 ?
+            if (REG_E >= 1)
+            {
+                add_e = 32768;
+            }
+
+            REG_AC = (ushort)(REG_AC >> 1);// shift right
+            REG_AC += add_e;
+            REG_E = right_bit; // fill E
+
+            return true;
+        }
+
+
+        public static bool CIL_instruction()
+        {
+            //string bitwise_str = Convert.ToString(REG_AC);
+            //ushort left_bit =(ushort) Convert.ToUInt16(bitwise_str, 2);
+            byte left_bit= 0;
+            if (REG_AC >= 32768)
+            {
+                left_bit = 1;
+            }
+            else
+            {
+                left_bit = 0;
+            }
+
+
+            REG_AC = (ushort)(REG_AC << 1);
+            REG_AC += REG_E;
+            REG_E = left_bit;
+
+
+
+            return true;
+        }
+
+         
 
 
     }
