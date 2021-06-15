@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.txt_code = new System.Windows.Forms.TextBox();
             this.lbl_code = new System.Windows.Forms.Label();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -59,7 +60,7 @@
             this.txt_code.Location = new System.Drawing.Point(27, 81);
             this.txt_code.Multiline = true;
             this.txt_code.Name = "txt_code";
-            this.txt_code.Size = new System.Drawing.Size(329, 622);
+            this.txt_code.Size = new System.Drawing.Size(342, 622);
             this.txt_code.TabIndex = 0;
             this.txt_code.TextChanged += new System.EventHandler(this.Txt_code_TextChanged);
             // 
@@ -139,22 +140,30 @@
             // datagrid_ram
             // 
             this.datagrid_ram.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Garamond", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Franklin Gothic Book", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.datagrid_ram.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Franklin Gothic Book", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.ForestGreen;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.datagrid_ram.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.datagrid_ram.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.datagrid_ram.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Lable,
             this.Address,
             this.Instruction,
             this.Hex});
-            this.datagrid_ram.GridColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.datagrid_ram.Location = new System.Drawing.Point(710, 81);
+            this.datagrid_ram.GridColor = System.Drawing.SystemColors.ActiveCaption;
+            this.datagrid_ram.Location = new System.Drawing.Point(562, 81);
             this.datagrid_ram.Name = "datagrid_ram";
             this.datagrid_ram.ReadOnly = true;
             this.datagrid_ram.RowTemplate.Height = 24;
-            this.datagrid_ram.Size = new System.Drawing.Size(445, 622);
+            this.datagrid_ram.Size = new System.Drawing.Size(604, 622);
             this.datagrid_ram.TabIndex = 6;
             this.datagrid_ram.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView1_CellContentClick);
             // 

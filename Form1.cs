@@ -26,7 +26,7 @@ namespace BasicCompiuter
 
             for(int i=0; i<1024; i++)
             {
-                datagrid_ram.Rows.Add("" , Convert.ToString(i), "", "");
+                datagrid_ram.Rows.Add("" , Convert.ToString(i, 16), "", "0000");
             }
 
 
