@@ -24,7 +24,7 @@ namespace BasicCompiuter
             //set default numbers in Ram table
            // datagrid_ram.Rows.Add(1024);
 
-            for(int i=0; i<1024; i++)
+            for(int i=0; i<4096; i++)
             {
                 datagrid_ram.Rows.Add("" , Convert.ToString(i, 16), "", "0000");
             }
@@ -130,6 +130,11 @@ namespace BasicCompiuter
         }
 
         private void Label1_Click_2(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Label11_Click(object sender, EventArgs e)
         {
 
         }

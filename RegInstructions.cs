@@ -41,8 +41,26 @@ namespace BasicCompiuter
         {
             //Complement AC
             REG_AC = (ushort) ~REG_AC;
-            return false;
+            return true;
         }
+
+        public static bool CME_instruction()
+        {
+           switch(REG_E)
+            {
+                case 0:
+                    REG_E = 1;
+                    break;
+                case 1:
+                    REG_E = 0;
+                    break;
+                default:
+                    return false;
+            }
+
+            return true;
+        }
+
 
 
 
