@@ -1,0 +1,10 @@
+D:\Term_4\Memari comp\project\BasicCompiuter\BasicCompiuter\bin\Debug\BasicCompiuter.exe.config
+D:\Term_4\Memari comp\project\BasicCompiuter\BasicCompiuter\bin\Debug\BasicCompiuter.exe
+D:\Term_4\Memari comp\project\BasicCompiuter\BasicCompiuter\bin\Debug\BasicCompiuter.pdb
+D:\Term_4\Memari comp\project\BasicCompiuter\BasicCompiuter\obj\Debug\BasicCompiuter.csprojAssemblyReference.cache
+D:\Term_4\Memari comp\project\BasicCompiuter\BasicCompiuter\obj\Debug\BasicCompiuter.Form1.resources
+D:\Term_4\Memari comp\project\BasicCompiuter\BasicCompiuter\obj\Debug\BasicCompiuter.Properties.Resources.resources
+D:\Term_4\Memari comp\project\BasicCompiuter\BasicCompiuter\obj\Debug\BasicCompiuter.csproj.GenerateResource.cache
+D:\Term_4\Memari comp\project\BasicCompiuter\BasicCompiuter\obj\Debug\BasicCompiuter.csproj.CoreCompileInputs.cache
+D:\Term_4\Memari comp\project\BasicCompiuter\BasicCompiuter\obj\Debug\BasicCompiuter.exe
+D:\Term_4\Memari comp\project\BasicCompiuter\BasicCompiuter\obj\Debug\BasicCompiuter.pdb
