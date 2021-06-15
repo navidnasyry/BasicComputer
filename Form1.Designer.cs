@@ -50,6 +50,9 @@
             this.Hex = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lbl_ram = new System.Windows.Forms.Label();
             this.form1BindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.toolStripSplitButton2 = new System.Windows.Forms.ToolStripSplitButton();
+            this.assembleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.assembleAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.datagrid_ram)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.form1BindingSource)).BeginInit();
@@ -79,7 +82,8 @@
             // 
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripSplitButton1});
+            this.toolStripSplitButton1,
+            this.toolStripSplitButton2});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1178, 27);
@@ -103,7 +107,7 @@
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(200, 26);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItem_Click);
             // 
@@ -111,7 +115,7 @@
             // 
             this.openFileToolStripMenuItem.Name = "openFileToolStripMenuItem";
             this.openFileToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.openFileToolStripMenuItem.Size = new System.Drawing.Size(200, 26);
+            this.openFileToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.openFileToolStripMenuItem.Text = "Open File";
             this.openFileToolStripMenuItem.Click += new System.EventHandler(this.OpenFileToolStripMenuItem_Click);
             // 
@@ -119,7 +123,7 @@
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(200, 26);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
@@ -209,6 +213,31 @@
             // 
             this.form1BindingSource.DataSource = typeof(BasicCompiuter.Form1);
             // 
+            // toolStripSplitButton2
+            // 
+            this.toolStripSplitButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripSplitButton2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.assembleToolStripMenuItem,
+            this.assembleAllToolStripMenuItem});
+            this.toolStripSplitButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSplitButton2.Image")));
+            this.toolStripSplitButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripSplitButton2.Name = "toolStripSplitButton2";
+            this.toolStripSplitButton2.Size = new System.Drawing.Size(39, 24);
+            this.toolStripSplitButton2.Text = "toolStripSplitButton2";
+            // 
+            // assembleToolStripMenuItem
+            // 
+            this.assembleToolStripMenuItem.Name = "assembleToolStripMenuItem";
+            this.assembleToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
+            this.assembleToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.assembleToolStripMenuItem.Text = "Assemble";
+            // 
+            // assembleAllToolStripMenuItem
+            // 
+            this.assembleAllToolStripMenuItem.Name = "assembleAllToolStripMenuItem";
+            this.assembleAllToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.assembleAllToolStripMenuItem.Text = "Assemble All";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -258,6 +287,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Instruction;
         private System.Windows.Forms.DataGridViewTextBoxColumn Hex;
         private System.Windows.Forms.Label lbl_ram;
+        private System.Windows.Forms.ToolStripSplitButton toolStripSplitButton2;
+        private System.Windows.Forms.ToolStripMenuItem assembleToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem assembleAllToolStripMenuItem;
     }
 }
 

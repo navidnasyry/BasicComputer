@@ -11,18 +11,19 @@ namespace BasicCompiuter
 {
     class RegistersClass
     {
-        private static Int32 AC; // 16 bit
-        private static Int32 DR; // 16 bit
-        private static Int32 AR; // 12 bit
-        private static Int32 IR; // 16 bit
-        private static Int32 PC; // 12 bit
-        private static Int32 TR; // 16 bit
-        private static Int32 INPR; // 8 bit
-        private static Int32 OUTR; // 8 bit
+        private static ushort AC; // 16 bit
+        private static ushort DR; // 16 bit
+        private static ushort AR; // 12 bit
+        private static ushort IR; // 16 bit
+        private static ushort PC; // 12 bit
+        private static ushort TR; // 16 bit
+        private static byte INPR; // 8 bit
+        private static byte OUTR; // 8 bit
+        private static byte E; // 1 bit
 
 
 
-        public static Int32 REG_AC {
+        public static ushort REG_AC {
             get
             {
                 return AC;
@@ -43,7 +44,7 @@ namespace BasicCompiuter
 
         }
 
-        public static Int32 REG_DR
+        public static ushort REG_DR
         {
             get
             {
@@ -65,7 +66,7 @@ namespace BasicCompiuter
 
         }
 
-        public static Int32 REG_AR
+        public static ushort REG_AR
         {
             get
             {
@@ -87,7 +88,7 @@ namespace BasicCompiuter
 
         }
 
-        public static Int32 REG_IR
+        public static ushort REG_IR
         {
             get
             {
@@ -110,7 +111,7 @@ namespace BasicCompiuter
         }
 
 
-        public static Int32 REG_PC
+        public static ushort REG_PC
         {
             get
             {
@@ -133,7 +134,7 @@ namespace BasicCompiuter
         }
 
 
-        public static Int32 REG_TR
+        public static ushort REG_TR
         {
             get
             {
@@ -156,7 +157,7 @@ namespace BasicCompiuter
         }
 
 
-        public static Int32 REG_INPR
+        public static byte REG_INPR
         {
             get
             {
@@ -179,7 +180,7 @@ namespace BasicCompiuter
         }
 
 
-        public static Int32 REG_OUTR
+        public static byte REG_OUTR
         {
             get
             {
@@ -202,6 +203,28 @@ namespace BasicCompiuter
         }
 
 
+
+        public static byte REG_E
+        {
+            get
+            {
+                return E;
+
+            }
+            set
+            {
+                if (value >= 0 && value <= 1)
+                {
+                    E = value;
+                }
+                else
+                {
+                    MessageBox.Show("E is 1 Bit !!", "Error");
+                }
+
+            }
+
+        }
 
     }
 }
