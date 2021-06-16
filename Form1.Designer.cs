@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.txt_code = new System.Windows.Forms.TextBox();
             this.lbl_code = new System.Windows.Forms.Label();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -44,10 +44,6 @@
             this.lbl_current_file_name = new System.Windows.Forms.Label();
             this.loadFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.datagrid_ram = new System.Windows.Forms.DataGridView();
-            this.Lable = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Address = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Instruction = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Hex = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lbl_ram = new System.Windows.Forms.Label();
             this.lbl_SC = new System.Windows.Forms.Label();
             this.txt_SC = new System.Windows.Forms.TextBox();
@@ -88,6 +84,10 @@
             this.txt_input = new System.Windows.Forms.TextBox();
             this.lbl_input = new System.Windows.Forms.Label();
             this.form1BindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.Label = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Address = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Instruction = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Hex = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.datagrid_ram)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.form1BindingSource)).BeginInit();
@@ -182,21 +182,21 @@
             // datagrid_ram
             // 
             this.datagrid_ram.AllowUserToResizeRows = false;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Franklin Gothic Book", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.datagrid_ram.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Franklin Gothic Book", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.ForestGreen;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.datagrid_ram.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Franklin Gothic Book", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.datagrid_ram.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Franklin Gothic Book", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.ForestGreen;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.datagrid_ram.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.datagrid_ram.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.datagrid_ram.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Lable,
+            this.Label,
             this.Address,
             this.Instruction,
             this.Hex});
@@ -208,30 +208,6 @@
             this.datagrid_ram.Size = new System.Drawing.Size(575, 703);
             this.datagrid_ram.TabIndex = 6;
             this.datagrid_ram.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView1_CellContentClick);
-            // 
-            // Lable
-            // 
-            this.Lable.HeaderText = "Lable";
-            this.Lable.Name = "Lable";
-            this.Lable.ReadOnly = true;
-            // 
-            // Address
-            // 
-            this.Address.HeaderText = "Address";
-            this.Address.Name = "Address";
-            this.Address.ReadOnly = true;
-            // 
-            // Instruction
-            // 
-            this.Instruction.HeaderText = "Instruction";
-            this.Instruction.Name = "Instruction";
-            this.Instruction.ReadOnly = true;
-            // 
-            // Hex
-            // 
-            this.Hex.HeaderText = "Hex";
-            this.Hex.Name = "Hex";
-            this.Hex.ReadOnly = true;
             // 
             // lbl_ram
             // 
@@ -552,6 +528,7 @@
             this.btn_reset.TabIndex = 45;
             this.btn_reset.Text = "Reset";
             this.btn_reset.UseVisualStyleBackColor = true;
+            this.btn_reset.Click += new System.EventHandler(this.Btn_reset_Click);
             // 
             // txt_input
             // 
@@ -573,6 +550,30 @@
             // form1BindingSource
             // 
             this.form1BindingSource.DataSource = typeof(BasicCompiuter.Form1);
+            // 
+            // Label
+            // 
+            this.Label.HeaderText = "Label";
+            this.Label.Name = "Label";
+            this.Label.ReadOnly = true;
+            // 
+            // Address
+            // 
+            this.Address.HeaderText = "Address";
+            this.Address.Name = "Address";
+            this.Address.ReadOnly = true;
+            // 
+            // Instruction
+            // 
+            this.Instruction.HeaderText = "Instruction";
+            this.Instruction.Name = "Instruction";
+            this.Instruction.ReadOnly = true;
+            // 
+            // Hex
+            // 
+            this.Hex.HeaderText = "Hex";
+            this.Hex.Name = "Hex";
+            this.Hex.ReadOnly = true;
             // 
             // Form1
             // 
@@ -630,7 +631,6 @@
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Basic Computer";
-            this.TopMost = true;
             this.Load += new System.EventHandler(this.Form1_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
@@ -656,10 +656,6 @@
         private System.Windows.Forms.SaveFileDialog loadFileDialog;
         private System.Windows.Forms.DataGridView datagrid_ram;
         private System.Windows.Forms.BindingSource form1BindingSource;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Lable;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Address;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Instruction;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Hex;
         private System.Windows.Forms.Label lbl_ram;
         private System.Windows.Forms.Label lbl_SC;
         private System.Windows.Forms.TextBox txt_SC;
@@ -699,6 +695,10 @@
         private System.Windows.Forms.Button btn_reset;
         private System.Windows.Forms.TextBox txt_input;
         private System.Windows.Forms.Label lbl_input;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Label;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Address;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Instruction;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Hex;
     }
 }
 

@@ -13,22 +13,22 @@ namespace BasicCompiuter
     {
 
 
-        private static byte SC; // 4 bit
-        private static ushort AC; // 16 bit // i should cast to short when use it.
-        private static ushort DR; // 16 bit // i should cast to short when use it.
-        private static ushort AR; // 12 bit
-        private static ushort IR; // 16 bit 
-        private static ushort PC; // 12 bit 
-        private static ushort TR; // 16 bit // i should cast to short when use it.
-        private static byte INPR; // 8 bit  // i should cast to short when use it.?
-        private static byte OUTR; // 8 bit  // i should cast to short when use it.?
-        private static byte E; // 1 bit
-        private static byte S; // 1 bit
-        private static byte I; // 1 bit
-        private static byte R; // 1 bit
-        private static byte IEN; // 1 bit
-        private static byte FGI; // 1 bit
-        private static byte FGO; // 1 bit
+        private static byte SC=0; // 4 bit
+        private static ushort AC=0; // 16 bit // i should cast to short when use it.
+        private static ushort DR=0; // 16 bit // i should cast to short when use it.
+        private static ushort AR=0; // 12 bit
+        private static ushort IR=0; // 16 bit 
+        private static ushort PC=0; // 12 bit 
+        private static ushort TR=0; // 16 bit // i should cast to short when use it.
+        private static byte INPR=0; // 8 bit  // i should cast to short when use it.?
+        private static byte OUTR=0; // 8 bit  // i should cast to short when use it.?
+        private static byte E=0; // 1 bit
+        private static byte S=0; // 1 bit
+        private static byte I=0; // 1 bit
+        private static byte R=0; // 1 bit
+        private static byte IEN=0; // 1 bit
+        private static byte FGI=0; // 1 bit
+        private static byte FGO=0; // 1 bit
 
 
 

@@ -19,6 +19,9 @@ namespace BasicCompiuter
             InitializeComponent();
         }
 
+        private IDictionary<string, string> Variables = new Dictionary<string, string>();
+        private string[] command_array;
+
         private void Form1_Load(object sender, EventArgs e)
         {
             //set default numbers in Ram table
@@ -154,23 +157,29 @@ namespace BasicCompiuter
         private void Btn_compile_Click(object sender, EventArgs e)
         {
 
-            //click Compile btn :)))
+            //click Compile button :)))
             string all_code = txt_code.Text;
-            string[] command_array = all_code.Split('\n');
+            command_array = all_code.Split('\n');
+            if (!Find_variables())
+            {
+                MessageBox.Show("Syntax Error !!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             foreach (string line in command_array)
             {
                 Console.WriteLine(line);
 
                 RegistersClass.REG_PC += 1;
 
-
+                Console.WriteLine(line);
                 if (line == "")
                     continue;
 
                 if (line[0] == '/' && line[1] == '/')//comment :)
                     continue;
 
-                string line_v2 = line.Replace("\n", "").Replace("\r", "");
+                string line_v2 = line.Replace("\n", "").Replace("\r", "").Replace(",", "");
                 string[] command = line_v2.Split(' ');
 
                 if (command[0] == "ORG")
@@ -286,6 +295,65 @@ namespace BasicCompiuter
                     datagrid_ram.Rows[RegInstructions.REG_PC].Cells["Instruction"].Value = line_v2;
                 }
 
+                else if (command[0] == "AND")
+                {
+
+                }
+                else if (command[0] == "ADD")
+                {
+
+                }
+                else if (command[0] == "LDA")
+                {
+
+                }
+                else if (command[0] == "STA")
+                {
+
+                }
+                else if (command[0] == "BUN")
+                {
+
+                }
+                else if (command[0] == "BSA")
+                {
+
+                }
+                else if (command[0] == "ISZ")
+                {
+
+                }
+                else if (command.Length == 3)
+                {
+                    string variable_key = command[0];
+                    string variable_base = command[1];
+                    string variable_value = command[2];
+                    string variable_value_hex;
+                    if (variable_base == "HEX")
+                    {
+                        //int base_10 = Convert.ToInt16(variable_value, 16);
+                        // variable_value = Convert.ToString(base_10);
+                        variable_value_hex = variable_value;
+                    }
+                    else
+                    {
+                        short var_int = Convert.ToInt16(variable_value);
+                        variable_value_hex = Convert.ToString(var_int, 16);
+                    }
+                    datagrid_ram.Rows[RegInstructions.REG_PC].Cells["HEX"].Value = variable_value_hex;
+                    datagrid_ram.Rows[RegInstructions.REG_PC].Cells["Instruction"].Value = variable_base+" "+variable_value;
+                    datagrid_ram.Rows[RegInstructions.REG_PC].Cells["Label"].Value = variable_key;
+
+                }
+
+                else if (command[0] == "END")
+                {
+
+
+                    MessageBox.Show("Compile successfully", "GOOD :)", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    break;
+                }
+                
                 else
                 {
                     MessageBox.Show("Syntax Error !!", "Error", MessageBoxButtons.OK,  MessageBoxIcon.Error);
@@ -298,29 +366,143 @@ namespace BasicCompiuter
         }
 
 
+        private bool Find_variables()
+        {
+            //try
+            //{
+            Variables.Clear();
+           // int index_of_table = RegistersClass.REG_PC;
+                int index = 0;
+                while (true)
+                {
+
+                    command_array[index] = command_array[index].Replace("\n", "").Replace("\r", "");
+                    if (command_array[index] == "HLT")
+                    {
+                        break;
+
+                    }
+
+                if (command_array[index].Contains(','))
+                {
+                    string line = command_array[index];
+                    line = line.Replace(",", "").Replace("\n", "").Replace("\r", "");
+
+                    string[] line_array = line.Split(' ');
+
+                    string variable_key = line_array[0];
+                    string variable_base = line_array[1];
+                    string variable_value = line_array[2];
+                    if (variable_base == "HEX")
+                    {
+                        int base_10 = Convert.ToInt16(variable_value, 16);
+                        variable_value = Convert.ToString(base_10);
+                    }
+
+                    Variables.Add(variable_key, variable_value);
+
+                    //command_array[index] = variable_base + " " + variable_value;
+
+
+                }
+
+                    index++;
+                }
+                index++;
+                while (true)
+                {
+                    if (command_array[index] == "END")
+                        break;
+
+                    string line = command_array[index];
+                    line = line.Replace(",", "").Replace("\n", "").Replace("\r", "");
+
+                    string[] line_array = line.Split(' ');
+
+                    string variable_key = line_array[0];
+                    string variable_base = line_array[1];
+                    string variable_value = line_array[2];
+                    if (variable_base == "HEX")
+                    {
+                        int base_10 = Convert.ToInt16(variable_value, 16);
+                        variable_value = Convert.ToString(base_10);
+                    }
+
+                    Variables.Add(variable_key, variable_value);
+
+                    //command_array[index] = "";
+                    index++;
+                }
+            // }
+            //catch
+            //{
+
+            //    return false;
+            //}
+
+            foreach (KeyValuePair<string, string> ele1 in Variables)
+            {
+                Console.WriteLine("{0} and {1}",
+                            ele1.Key, ele1.Value);
+            }
+            return true;
+        }
 
         private void Update_register_values()
         {
-            txt_AC.Text = Convert.ToString(RegistersClass.REG_AC);
-            txt_SC.Text = Convert.ToString(RegistersClass.REG_SC);
-            txt_DR.Text = Convert.ToString(RegistersClass.REG_DR);
-            txt_AR.Text = Convert.ToString(RegistersClass.REG_AR);
-            txt_IR.Text = Convert.ToString(RegistersClass.REG_IR);
-            txt_PC.Text = Convert.ToString(RegistersClass.REG_PC);
-            txt_TR.Text = Convert.ToString(RegistersClass.REG_TR);
-            txt_INPR.Text = Convert.ToString(RegistersClass.REG_INPR);
-            txt_OUTR.Text = Convert.ToString(RegistersClass.REG_OUTR);
-            txt_E.Text = Convert.ToString(RegistersClass.REG_E);
-            txt_S.Text = Convert.ToString(RegistersClass.REG_S);
-            txt_I.Text = Convert.ToString(RegistersClass.REG_I);
-            txt_R.Text = Convert.ToString(RegistersClass.REG_R);
-            txt_IEN.Text = Convert.ToString(RegistersClass.REG_IEN);
-            txt_FGI.Text = Convert.ToString(RegistersClass.REG_FGI);
-            txt_FGO.Text = Convert.ToString(RegistersClass.REG_FGO);
+            txt_AC.Text = Convert.ToString(RegistersClass.REG_AC, 16);
+            txt_SC.Text = Convert.ToString(RegistersClass.REG_SC, 16);
+            txt_DR.Text = Convert.ToString(RegistersClass.REG_DR, 16);
+            txt_AR.Text = Convert.ToString(RegistersClass.REG_AR, 16);
+            txt_IR.Text = Convert.ToString(RegistersClass.REG_IR, 16);
+            txt_PC.Text = Convert.ToString(RegistersClass.REG_PC, 16);
+            txt_TR.Text = Convert.ToString(RegistersClass.REG_TR, 16);
+            txt_INPR.Text = Convert.ToString(RegistersClass.REG_INPR, 16);
+            txt_OUTR.Text = Convert.ToString(RegistersClass.REG_OUTR, 16);
+            txt_E.Text = Convert.ToString(RegistersClass.REG_E, 16);
+            txt_S.Text = Convert.ToString(RegistersClass.REG_S, 16);
+            txt_I.Text = Convert.ToString(RegistersClass.REG_I, 16);
+            txt_R.Text = Convert.ToString(RegistersClass.REG_R, 16);
+            txt_IEN.Text = Convert.ToString(RegistersClass.REG_IEN, 16);
+            txt_FGI.Text = Convert.ToString(RegistersClass.REG_FGI, 16);
+            txt_FGO.Text = Convert.ToString(RegistersClass.REG_FGO, 16);
 
 
 
 
+        }
+
+        private void Btn_reset_Click(object sender, EventArgs e)
+        {
+
+            for (int i=0; i<4096; i++)
+            {
+                datagrid_ram.Rows[i].Cells["HEX"].Value = "0000";
+                datagrid_ram.Rows[i].Cells["Instruction"].Value = "";
+                datagrid_ram.Rows[i].Cells["Label"].Value = "";
+                datagrid_ram.Rows[i].Cells["Address"].Value = Convert.ToString(i, 16);
+            }
+
+            RegistersClass.REG_SC = 0; // 4 bit
+            RegistersClass.REG_AC = 0; // 16 bit // i should cast to short when use it.
+            RegistersClass.REG_DR = 0; // 16 bit // i should cast to short when use it.
+            RegistersClass.REG_AR = 0; // 12 bit
+            RegistersClass.REG_IR = 0; // 16 bit 
+            RegistersClass.REG_PC = 0; // 12 bit 
+            RegistersClass.REG_TR = 0; // 16 bit // i should cast to short when use it.
+            RegistersClass.REG_INPR = 0; // 8 bit  // i should cast to short when use it.?
+            RegistersClass.REG_OUTR = 0; // 8 bit  // i should cast to short when use it.?
+            RegistersClass.REG_E = 0; // 1 bit
+            RegistersClass.REG_S = 0; // 1 bit
+            RegistersClass.REG_I = 0; // 1 bit
+            RegistersClass.REG_R = 0; // 1 bit
+            RegistersClass.REG_IEN = 0; // 1 bit
+            RegistersClass.REG_FGI = 0; // 1 bit
+            RegistersClass.REG_FGO = 0;
+
+            Variables.Clear();
+
+            Update_register_values();
         }
     }
 }
