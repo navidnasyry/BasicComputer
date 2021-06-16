@@ -165,6 +165,7 @@ namespace BasicCompiuter
         public static bool HTL_instruction()
         {
             REG_S = 0;
+            // and ??
 
             return true;
         }

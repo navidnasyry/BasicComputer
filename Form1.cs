@@ -27,7 +27,19 @@ namespace BasicCompiuter
             for(int i=0; i<4096; i++)
             {
                 datagrid_ram.Rows.Add("" , Convert.ToString(i, 16), "", "0000");
+                //datagrid_ram.Rows[i].Cells["Hex"].Value = "2222";
+
+
             }
+            
+            //DataGridViewRow row = datagrid_ram.Rows[10];
+            //Console.WriteLine(row.Cells["Hex"].Value.ToString());
+            //Console.WriteLine(row.Cells["Address"].Value.ToString());
+
+            //int row1 = datagrid_ram.Rows.Count;
+            //Console.WriteLine(row1);
+
+            
 
 
         }
@@ -136,6 +148,21 @@ namespace BasicCompiuter
 
         private void Label11_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void Btn_compile_Click(object sender, EventArgs e)
+        {
+
+            //click Compile btn :)))
+            string all_code = txt_code.Text;
+
+            string[] all_code_array = all_code.Split('a');
+
+            foreach (string i in all_code_array)
+            {
+                Console.WriteLine(i);
+            }
 
         }
     }
