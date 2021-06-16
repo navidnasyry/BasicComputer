@@ -112,8 +112,61 @@ namespace BasicCompiuter
             return true;
         }
 
+        public static bool INC_instruction()
+        {
+            REG_AC += 1;
+
+            return true;
+        }
+
+        public static bool SPA_instruction()
+        {
+            // AC[15] == 0
+            if (REG_AC < 32768)
+            {
+                REG_PC += 1;
+            }
+            return true;
+        }
+
+        public static bool SNA_instruction()
+        {
+            if (REG_AC >= 32768)
+            {
+                REG_PC += 1;
+            }
+
+            return true;
+        }
+
+
+        public static bool SZA_instruction()
+        {
+            if (REG_AC == 0)
+            {
+                REG_PC += 1;
+            }
+
+            return true;
+        }
          
 
+        public static bool SZE_instruction()
+        {
+            if (REG_E == 0)
+            {
+                REG_PC += 1;
+            }
 
+            return true;
+        }
+
+
+        public static bool HTL_instruction()
+        {
+            REG_S = 0;
+
+            return true;
+        }
     }
 }

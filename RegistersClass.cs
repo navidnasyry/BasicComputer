@@ -11,15 +11,17 @@ namespace BasicCompiuter
 {
     class RegistersClass
     {
+
+
         private static byte SC; // 4 bit
-        private static ushort AC; // 16 bit
-        private static ushort DR; // 16 bit
+        private static ushort AC; // 16 bit // i should cast to short when use it.
+        private static ushort DR; // 16 bit // i should cast to short when use it.
         private static ushort AR; // 12 bit
-        private static ushort IR; // 16 bit
-        private static ushort PC; // 12 bit
-        private static ushort TR; // 16 bit
-        private static byte INPR; // 8 bit
-        private static byte OUTR; // 8 bit
+        private static ushort IR; // 16 bit 
+        private static ushort PC; // 12 bit 
+        private static ushort TR; // 16 bit // i should cast to short when use it.
+        private static byte INPR; // 8 bit  // i should cast to short when use it.?
+        private static byte OUTR; // 8 bit  // i should cast to short when use it.?
         private static byte E; // 1 bit
         private static byte S; // 1 bit
         private static byte I; // 1 bit
