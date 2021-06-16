@@ -156,13 +156,170 @@ namespace BasicCompiuter
 
             //click Compile btn :)))
             string all_code = txt_code.Text;
-
-            string[] all_code_array = all_code.Split('a');
-
-            foreach (string i in all_code_array)
+            string[] command_array = all_code.Split('\n');
+            foreach (string line in command_array)
             {
-                Console.WriteLine(i);
+                Console.WriteLine(line);
+
+                RegistersClass.REG_PC += 1;
+
+
+                if (line == "")
+                    continue;
+
+                if (line[0] == '/' && line[1] == '/')//comment :)
+                    continue;
+
+                string line_v2 = line.Replace("\n", "").Replace("\r", "");
+                string[] command = line_v2.Split(' ');
+
+                if (command[0] == "ORG")
+                {
+                    string hex_value = command[1];
+                    int decValue = Convert.ToInt32(hex_value, 16);
+                    RegistersClass.REG_PC = (ushort)decValue;
+
+
+                }
+                else if (command[0] == "CLA")
+                {
+                    RegInstructions.CLA_instruction();
+                    datagrid_ram.Rows[RegInstructions.REG_PC].Cells["HEX"].Value = RegInstructions.CLA_code;
+                    datagrid_ram.Rows[RegInstructions.REG_PC].Cells["Instruction"].Value = line_v2;
+
+
+                }
+                else if (command[0] == "CLE")
+                {
+                    RegInstructions.CLE_instruction();
+
+                    datagrid_ram.Rows[RegInstructions.REG_PC].Cells["HEX"].Value = RegInstructions.CLE_code;
+                    datagrid_ram.Rows[RegInstructions.REG_PC].Cells["Instruction"].Value = line_v2;
+
+                }
+
+                else if (command[0] == "CMA")
+                {
+                    RegInstructions.CMA_instruction();
+
+                    datagrid_ram.Rows[RegInstructions.REG_PC].Cells["HEX"].Value = RegInstructions.CMA_code;
+                    datagrid_ram.Rows[RegInstructions.REG_PC].Cells["Instruction"].Value = line_v2;
+                }
+
+                else if (command[0] == "CME")
+                {
+                    RegInstructions.CME_instruction();
+
+                    datagrid_ram.Rows[RegInstructions.REG_PC].Cells["HEX"].Value = RegInstructions.CME_code;
+                    datagrid_ram.Rows[RegInstructions.REG_PC].Cells["Instruction"].Value = line_v2;
+                }
+
+                else if (command[0] == "CIR")
+                {
+                    RegInstructions.CIR_instruction();
+
+                    datagrid_ram.Rows[RegInstructions.REG_PC].Cells["HEX"].Value = RegInstructions.CIR_code;
+                    datagrid_ram.Rows[RegInstructions.REG_PC].Cells["Instruction"].Value = line_v2;
+                }
+
+
+                else if (command[0] == "CIL")
+                {
+                    RegInstructions.CIL_instruction();
+
+                    datagrid_ram.Rows[RegInstructions.REG_PC].Cells["HEX"].Value = RegInstructions.CIL_code;
+                    datagrid_ram.Rows[RegInstructions.REG_PC].Cells["Instruction"].Value = line_v2;
+                }
+
+
+                else if (command[0] == "INC")
+                {
+                    RegInstructions.INC_instruction();
+
+                    datagrid_ram.Rows[RegInstructions.REG_PC].Cells["HEX"].Value = RegInstructions.INC_code;
+                    datagrid_ram.Rows[RegInstructions.REG_PC].Cells["Instruction"].Value = line_v2;
+                }
+
+                else if (command[0] == "SPA")
+                {
+                    RegInstructions.SPA_instruction();
+
+                    datagrid_ram.Rows[RegInstructions.REG_PC].Cells["HEX"].Value = RegInstructions.SPA_code;
+                    datagrid_ram.Rows[RegInstructions.REG_PC].Cells["Instruction"].Value = line_v2;
+                }
+
+
+                else if (command[0] == "SNA")
+                {
+                    RegInstructions.SNA_instruction();
+
+                    datagrid_ram.Rows[RegInstructions.REG_PC].Cells["HEX"].Value = RegInstructions.SNA_code;
+                    datagrid_ram.Rows[RegInstructions.REG_PC].Cells["Instruction"].Value = line_v2;
+                }
+
+
+                else if (command[0] == "SZA")
+                {
+                    RegInstructions.SZA_instruction();
+
+                    datagrid_ram.Rows[RegInstructions.REG_PC].Cells["HEX"].Value = RegInstructions.SZA_code;
+                    datagrid_ram.Rows[RegInstructions.REG_PC].Cells["Instruction"].Value = line_v2;
+                }
+
+
+                else if (command[0] == "SZE")
+                {
+                    RegInstructions.SZE_instruction();
+
+
+                    datagrid_ram.Rows[RegInstructions.REG_PC].Cells["HEX"].Value = RegInstructions.SZE_code;
+                    datagrid_ram.Rows[RegInstructions.REG_PC].Cells["Instruction"].Value = line_v2;
+                }
+
+
+                else if (command[0] == "HLT")
+                {
+                    RegInstructions.HLT_instruction();
+
+
+                    datagrid_ram.Rows[RegInstructions.REG_PC].Cells["HEX"].Value = RegInstructions.HLT_code;
+                    datagrid_ram.Rows[RegInstructions.REG_PC].Cells["Instruction"].Value = line_v2;
+                }
+
+                else
+                {
+                    MessageBox.Show("Syntax Error !!", "Error", MessageBoxButtons.OK,  MessageBoxIcon.Error);
+                    break;
+                }
+
+                Update_register_values();
             }
+
+        }
+
+
+
+        private void Update_register_values()
+        {
+            txt_AC.Text = Convert.ToString(RegistersClass.REG_AC);
+            txt_SC.Text = Convert.ToString(RegistersClass.REG_SC);
+            txt_DR.Text = Convert.ToString(RegistersClass.REG_DR);
+            txt_AR.Text = Convert.ToString(RegistersClass.REG_AR);
+            txt_IR.Text = Convert.ToString(RegistersClass.REG_IR);
+            txt_PC.Text = Convert.ToString(RegistersClass.REG_PC);
+            txt_TR.Text = Convert.ToString(RegistersClass.REG_TR);
+            txt_INPR.Text = Convert.ToString(RegistersClass.REG_INPR);
+            txt_OUTR.Text = Convert.ToString(RegistersClass.REG_OUTR);
+            txt_E.Text = Convert.ToString(RegistersClass.REG_E);
+            txt_S.Text = Convert.ToString(RegistersClass.REG_S);
+            txt_I.Text = Convert.ToString(RegistersClass.REG_I);
+            txt_R.Text = Convert.ToString(RegistersClass.REG_R);
+            txt_IEN.Text = Convert.ToString(RegistersClass.REG_IEN);
+            txt_FGI.Text = Convert.ToString(RegistersClass.REG_FGI);
+            txt_FGO.Text = Convert.ToString(RegistersClass.REG_FGO);
+
+
+
 
         }
     }

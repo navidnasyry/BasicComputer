@@ -32,7 +32,7 @@ namespace BasicCompiuter
 
 
 
-        protected static byte REG_SC
+        public static byte REG_SC
         {
             get
             {
@@ -55,7 +55,7 @@ namespace BasicCompiuter
         }
 
 
-        protected static ushort REG_AC {
+        public static ushort REG_AC {
             get
             {
                 return AC;
@@ -76,7 +76,7 @@ namespace BasicCompiuter
 
         }
 
-        protected static ushort REG_DR
+        public static ushort REG_DR
         {
             get
             {
@@ -98,7 +98,7 @@ namespace BasicCompiuter
 
         }
 
-        protected static ushort REG_AR
+        public static ushort REG_AR
         {
             get
             {
@@ -120,7 +120,7 @@ namespace BasicCompiuter
 
         }
 
-        protected static ushort REG_IR
+        public static ushort REG_IR
         {
             get
             {
@@ -143,7 +143,7 @@ namespace BasicCompiuter
         }
 
 
-        protected static ushort REG_PC
+        public static ushort REG_PC
         {
             get
             {
@@ -166,7 +166,7 @@ namespace BasicCompiuter
         }
 
 
-        protected static ushort REG_TR
+        public static ushort REG_TR
         {
             get
             {
@@ -189,7 +189,7 @@ namespace BasicCompiuter
         }
 
 
-        protected static byte REG_INPR
+        public static byte REG_INPR
         {
             get
             {
@@ -212,7 +212,7 @@ namespace BasicCompiuter
         }
 
 
-        protected static byte REG_OUTR
+        public static byte REG_OUTR
         {
             get
             {
@@ -235,7 +235,7 @@ namespace BasicCompiuter
         }
 
 
-        protected static byte REG_E
+        public static byte REG_E
         {
             get
             {
@@ -258,7 +258,7 @@ namespace BasicCompiuter
         }
 
 
-        protected static byte REG_S
+        public static byte REG_S
         {
             get
             {
@@ -281,7 +281,7 @@ namespace BasicCompiuter
         }
 
 
-        protected static byte REG_R
+        public static byte REG_R
         {
             get
             {
@@ -304,7 +304,7 @@ namespace BasicCompiuter
         }
 
 
-        protected static byte REG_I
+        public static byte REG_I
         {
             get
             {
@@ -327,7 +327,7 @@ namespace BasicCompiuter
         }
 
 
-        protected static byte REG_IEN
+        public static byte REG_IEN
         {
             get
             {
@@ -350,7 +350,7 @@ namespace BasicCompiuter
         }
 
 
-        protected static byte REG_FGI
+        public static byte REG_FGI
         {
             get
             {
@@ -373,7 +373,7 @@ namespace BasicCompiuter
         }
 
 
-        protected static byte REG_FGO
+        public static byte REG_FGO
         {
             get
             {

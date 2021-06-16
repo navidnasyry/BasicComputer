@@ -18,8 +18,9 @@ namespace BasicCompiuter
         public const string CIL_code = "7040";
         public const string INC_code = "7020";
         public const string SPA_code = "7010";
-        public const string SNA_code = "7004";
-        public const string SZE_code = "1002";
+        public const string SNA_code = "7008";
+        public const string SZE_code = "7002";
+        public const string SZA_code = "7004";
         public const string HLT_code = "7001";
 
 
@@ -162,7 +163,7 @@ namespace BasicCompiuter
         }
 
 
-        public static bool HTL_instruction()
+        public static bool HLT_instruction()
         {
             REG_S = 0;
             // and ??

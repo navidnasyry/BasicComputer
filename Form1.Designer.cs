@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.txt_code = new System.Windows.Forms.TextBox();
             this.lbl_code = new System.Windows.Forms.Label();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -63,7 +63,7 @@
             this.lbl_AC = new System.Windows.Forms.Label();
             this.txt_TR = new System.Windows.Forms.TextBox();
             this.lbl_TR = new System.Windows.Forms.Label();
-            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.txt_INPR = new System.Windows.Forms.TextBox();
             this.lbl_INPR = new System.Windows.Forms.Label();
             this.txt_OUTR = new System.Windows.Forms.TextBox();
             this.lbl_OUTR = new System.Windows.Forms.Label();
@@ -85,9 +85,9 @@
             this.btn_next_step = new System.Windows.Forms.Button();
             this.btn_compile = new System.Windows.Forms.Button();
             this.btn_reset = new System.Windows.Forms.Button();
-            this.form1BindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.txt_input = new System.Windows.Forms.TextBox();
             this.lbl_input = new System.Windows.Forms.Label();
+            this.form1BindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.datagrid_ram)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.form1BindingSource)).BeginInit();
@@ -141,7 +141,7 @@
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(200, 26);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItem_Click);
             // 
@@ -149,7 +149,7 @@
             // 
             this.openFileToolStripMenuItem.Name = "openFileToolStripMenuItem";
             this.openFileToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.openFileToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.openFileToolStripMenuItem.Size = new System.Drawing.Size(200, 26);
             this.openFileToolStripMenuItem.Text = "Open File";
             this.openFileToolStripMenuItem.Click += new System.EventHandler(this.OpenFileToolStripMenuItem_Click);
             // 
@@ -157,7 +157,7 @@
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(200, 26);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
@@ -182,18 +182,18 @@
             // datagrid_ram
             // 
             this.datagrid_ram.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Franklin Gothic Book", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.datagrid_ram.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Franklin Gothic Book", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.ForestGreen;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.datagrid_ram.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Franklin Gothic Book", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.datagrid_ram.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Franklin Gothic Book", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.ForestGreen;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.datagrid_ram.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.datagrid_ram.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.datagrid_ram.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Lable,
@@ -362,13 +362,13 @@
             this.lbl_TR.TabIndex = 20;
             this.lbl_TR.Text = "TR :";
             // 
-            // textBox8
+            // txt_INPR
             // 
-            this.textBox8.Location = new System.Drawing.Point(671, 433);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.ReadOnly = true;
-            this.textBox8.Size = new System.Drawing.Size(189, 22);
-            this.textBox8.TabIndex = 23;
+            this.txt_INPR.Location = new System.Drawing.Point(671, 433);
+            this.txt_INPR.Name = "txt_INPR";
+            this.txt_INPR.ReadOnly = true;
+            this.txt_INPR.Size = new System.Drawing.Size(189, 22);
+            this.txt_INPR.TabIndex = 23;
             // 
             // lbl_INPR
             // 
@@ -553,10 +553,6 @@
             this.btn_reset.Text = "Reset";
             this.btn_reset.UseVisualStyleBackColor = true;
             // 
-            // form1BindingSource
-            // 
-            this.form1BindingSource.DataSource = typeof(BasicCompiuter.Form1);
-            // 
             // txt_input
             // 
             this.txt_input.BackColor = System.Drawing.SystemColors.Info;
@@ -573,6 +569,10 @@
             this.lbl_input.Size = new System.Drawing.Size(47, 17);
             this.lbl_input.TabIndex = 46;
             this.lbl_input.Text = "input :";
+            // 
+            // form1BindingSource
+            // 
+            this.form1BindingSource.DataSource = typeof(BasicCompiuter.Form1);
             // 
             // Form1
             // 
@@ -601,7 +601,7 @@
             this.Controls.Add(this.lbl_I);
             this.Controls.Add(this.txt_OUTR);
             this.Controls.Add(this.lbl_OUTR);
-            this.Controls.Add(this.textBox8);
+            this.Controls.Add(this.txt_INPR);
             this.Controls.Add(this.lbl_INPR);
             this.Controls.Add(this.txt_TR);
             this.Controls.Add(this.lbl_TR);
@@ -675,7 +675,7 @@
         private System.Windows.Forms.Label lbl_AC;
         private System.Windows.Forms.TextBox txt_TR;
         private System.Windows.Forms.Label lbl_TR;
-        private System.Windows.Forms.TextBox textBox8;
+        private System.Windows.Forms.TextBox txt_INPR;
         private System.Windows.Forms.Label lbl_INPR;
         private System.Windows.Forms.TextBox txt_OUTR;
         private System.Windows.Forms.Label lbl_OUTR;
