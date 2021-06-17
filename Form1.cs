@@ -20,6 +20,8 @@ namespace BasicCompiuter
         }
 
         private IDictionary<string, string> Variables = new Dictionary<string, string>();
+        private IDictionary<string, int> Variables_address = new Dictionary<string, int>();
+
         private string[] command_array;
 
         private void Form1_Load(object sender, EventArgs e)
@@ -153,18 +155,52 @@ namespace BasicCompiuter
         {
 
         }
+        private void reset()
+        {
+
+            for (int i = 0; i < 4096; i++)
+            {
+                datagrid_ram.Rows[i].Cells["HEX"].Value = "0000";
+                datagrid_ram.Rows[i].Cells["Instruction"].Value = "";
+                datagrid_ram.Rows[i].Cells["Label"].Value = "";
+                datagrid_ram.Rows[i].Cells["Address"].Value = Convert.ToString(i, 16);
+            }
+
+            RegistersClass.REG_SC = 0; // 4 bit
+            RegistersClass.REG_AC = 0; // 16 bit // i should cast to short when use it.
+            RegistersClass.REG_DR = 0; // 16 bit // i should cast to short when use it.
+            RegistersClass.REG_AR = 0; // 12 bit
+            RegistersClass.REG_IR = 0; // 16 bit 
+            RegistersClass.REG_PC = 0; // 12 bit 
+            RegistersClass.REG_TR = 0; // 16 bit // i should cast to short when use it.
+            RegistersClass.REG_INPR = 0; // 8 bit  // i should cast to short when use it.?
+            RegistersClass.REG_OUTR = 0; // 8 bit  // i should cast to short when use it.?
+            RegistersClass.REG_E = 0; // 1 bit
+            RegistersClass.REG_S = 0; // 1 bit
+            RegistersClass.REG_I = 0; // 1 bit
+            RegistersClass.REG_R = 0; // 1 bit
+            RegistersClass.REG_IEN = 0; // 1 bit
+            RegistersClass.REG_FGI = 0; // 1 bit
+            RegistersClass.REG_FGO = 0;
+
+            Variables.Clear();
+            Variables_address.Clear();
+
+            Update_register_values();
+        }
 
         private void Btn_compile_Click(object sender, EventArgs e)
         {
-
+            reset();
             //click Compile button :)))
             string all_code = txt_code.Text;
-            command_array = all_code.Split('\n');
-            if (!Find_variables())
+            if (all_code == "")
             {
-                MessageBox.Show("Syntax Error !!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Please Enter Code !!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            command_array = all_code.Split('\n');
+
 
             foreach (string line in command_array)
             {
@@ -177,17 +213,24 @@ namespace BasicCompiuter
                     continue;
 
                 if (line[0] == '/' && line[1] == '/')//comment :)
+                {
+                    RegistersClass.REG_PC -= 1;
                     continue;
+                }
 
                 string line_v2 = line.Replace("\n", "").Replace("\r", "").Replace(",", "");
                 string[] command = line_v2.Split(' ');
 
-                if (command[0] == "ORG")
+                if (command[0] == "ORG")//my code must start with ORG :)
                 {
                     string hex_value = command[1];
                     int decValue = Convert.ToInt32(hex_value, 16);
                     RegistersClass.REG_PC = (ushort)decValue;
-
+                    if (!Find_variables())
+                    {
+                        MessageBox.Show("Syntax Error !!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
 
                 }
                 else if (command[0] == "CLA")
@@ -297,14 +340,44 @@ namespace BasicCompiuter
 
                 else if (command[0] == "AND")
                 {
+                    string var_name = command[1];
+                    RegistersClass.REG_AR = (ushort)Variables_address[var_name];
+                    short reg_value_un = Convert.ToInt16(Variables[var_name]);
+                    ushort reg_value = (ushort)reg_value_un;
+
+                    RamInstructions.AND(reg_value, datagrid_ram);
+                    string var_address_hex = Convert.ToString(Variables_address[var_name], 16);
+
+                    datagrid_ram.Rows[RegInstructions.REG_PC].Cells["HEX"].Value = RamInstructions.AND_code + var_address_hex;
+                    datagrid_ram.Rows[RegInstructions.REG_PC].Cells["Instruction"].Value = line_v2;
 
                 }
                 else if (command[0] == "ADD")
                 {
 
+                    string var_name = command[1];
+                    RegistersClass.REG_AR = (ushort)Variables_address[var_name];
+                    short reg_value_un = Convert.ToInt16(Variables[var_name]);
+                    ushort reg_value = (ushort)reg_value_un;
+                    RamInstructions.ADD(reg_value, datagrid_ram);
+                    string var_address_hex = Convert.ToString(Variables_address[var_name], 16);
+
+                    datagrid_ram.Rows[RegInstructions.REG_PC].Cells["HEX"].Value = RamInstructions.ADD_code + var_address_hex;
+                    datagrid_ram.Rows[RegInstructions.REG_PC].Cells["Instruction"].Value = line_v2;
+
                 }
                 else if (command[0] == "LDA")
                 {
+
+                    string var_name = command[1];
+                    RegistersClass.REG_AR = (ushort)Variables_address[var_name];
+                    short reg_value_un = Convert.ToInt16(Variables[var_name]);
+                    ushort reg_value = (ushort)reg_value_un;
+                    RamInstructions.LDA(reg_value , datagrid_ram);
+                    string var_address_hex = Convert.ToString(Variables_address[var_name], 16);
+
+                    datagrid_ram.Rows[RegInstructions.REG_PC].Cells["HEX"].Value = RamInstructions.LDA_code + var_address_hex;
+                    datagrid_ram.Rows[RegInstructions.REG_PC].Cells["Instruction"].Value = line_v2;
 
                 }
                 else if (command[0] == "STA")
@@ -368,9 +441,9 @@ namespace BasicCompiuter
 
         private bool Find_variables()
         {
-            //try
-            //{
-            Variables.Clear();
+            try
+            {
+                Variables.Clear();
            // int index_of_table = RegistersClass.REG_PC;
                 int index = 0;
                 while (true)
@@ -400,7 +473,7 @@ namespace BasicCompiuter
                     }
 
                     Variables.Add(variable_key, variable_value);
-
+                    Variables_address.Add(variable_key, index + RegistersClass.REG_PC);
                     //command_array[index] = variable_base + " " + variable_value;
 
 
@@ -429,22 +502,29 @@ namespace BasicCompiuter
                     }
 
                     Variables.Add(variable_key, variable_value);
+                    Variables_address.Add(variable_key, index + RegistersClass.REG_PC);
 
                     //command_array[index] = "";
                     index++;
                 }
-            // }
-            //catch
-            //{
+             }
+            catch
+            {
 
-            //    return false;
-            //}
+                return false;
+            }
 
             foreach (KeyValuePair<string, string> ele1 in Variables)
             {
                 Console.WriteLine("{0} and {1}",
                             ele1.Key, ele1.Value);
             }
+            foreach (KeyValuePair<string, int> ele1 in Variables_address)
+            {
+                Console.WriteLine("{0} and {1}",
+                            ele1.Key, ele1.Value);
+            }
+
             return true;
         }
 
@@ -472,37 +552,10 @@ namespace BasicCompiuter
 
         }
 
+
         private void Btn_reset_Click(object sender, EventArgs e)
         {
-
-            for (int i=0; i<4096; i++)
-            {
-                datagrid_ram.Rows[i].Cells["HEX"].Value = "0000";
-                datagrid_ram.Rows[i].Cells["Instruction"].Value = "";
-                datagrid_ram.Rows[i].Cells["Label"].Value = "";
-                datagrid_ram.Rows[i].Cells["Address"].Value = Convert.ToString(i, 16);
-            }
-
-            RegistersClass.REG_SC = 0; // 4 bit
-            RegistersClass.REG_AC = 0; // 16 bit // i should cast to short when use it.
-            RegistersClass.REG_DR = 0; // 16 bit // i should cast to short when use it.
-            RegistersClass.REG_AR = 0; // 12 bit
-            RegistersClass.REG_IR = 0; // 16 bit 
-            RegistersClass.REG_PC = 0; // 12 bit 
-            RegistersClass.REG_TR = 0; // 16 bit // i should cast to short when use it.
-            RegistersClass.REG_INPR = 0; // 8 bit  // i should cast to short when use it.?
-            RegistersClass.REG_OUTR = 0; // 8 bit  // i should cast to short when use it.?
-            RegistersClass.REG_E = 0; // 1 bit
-            RegistersClass.REG_S = 0; // 1 bit
-            RegistersClass.REG_I = 0; // 1 bit
-            RegistersClass.REG_R = 0; // 1 bit
-            RegistersClass.REG_IEN = 0; // 1 bit
-            RegistersClass.REG_FGI = 0; // 1 bit
-            RegistersClass.REG_FGO = 0;
-
-            Variables.Clear();
-
-            Update_register_values();
+            reset();
         }
     }
 }

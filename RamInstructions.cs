@@ -29,22 +29,24 @@ namespace BasicCompiuter
 
       
 
-        public static ushort AND(ushort address_reg, DataGridView my_ram )// input = AR , RAM
+        public static ushort AND(ushort reg_value, DataGridView my_ram )// input = AR , RAM
         {
-            DataGridViewRow selected_row = my_ram.Rows[address_reg];
-            REG_DR = Convert.ToUInt16(selected_row.Cells["Hex"].Value.ToString());
+            //DataGridViewRow selected_row = my_ram.Rows[address_reg];
+            //REG_DR = Convert.ToUInt16(selected_row.Cells["Hex"].Value.ToString(), 16);
+            REG_DR = reg_value;
             REG_SC = 0;
             REG_AC = (ushort) (REG_AC & REG_DR);
             return REG_AC;
 
         }
          
-        public static ushort ADD(ushort address_reg, DataGridView my_ram)
+        public static ushort ADD(ushort reg_value, DataGridView my_ram)
         {
             //how can I control signed numbers ?
 
-            DataGridViewRow selected_row = my_ram.Rows[address_reg];
-            REG_DR = Convert.ToUInt16(selected_row.Cells["Hex"].Value.ToString());
+            //DataGridViewRow selected_row = my_ram.Rows[address_reg];
+            //REG_DR = Convert.ToUInt16(selected_row.Cells["Hex"].Value.ToString(), 16);
+            REG_DR = reg_value;
             REG_SC = 0;
             int temp;
             if (REG_DR + REG_AC > 65535)
@@ -64,19 +66,24 @@ namespace BasicCompiuter
             return REG_AC;
         }
 
-        public static ushort LDA(ushort address_reg, DataGridView my_ram)
+        public static ushort LDA(ushort reg_value, DataGridView my_ram)
         {
-            DataGridViewRow selected_row = my_ram.Rows[address_reg];
-            REG_DR = Convert.ToUInt16(selected_row.Cells["Hex"].Value.ToString());
+            //DataGridViewRow selected_row = my_ram.Rows[address_reg];
+            //REG_DR = Convert.ToUInt16(selected_row.Cells["Hex"].Value.ToString(), 16);
+            REG_DR = reg_value;
             REG_SC = 0;
             REG_AC = REG_DR;
+            //Console.WriteLine("REG AC = " + REG_AC);
+            //Console.WriteLine("REG AR = " + address_reg);
+            //Console.WriteLine(selected_row.Cells["Hex"].Value.ToString());
+
             return REG_AC;
 
         }
 
         public static ushort STA(ushort address_reg, DataGridView my_ram)
         {
-            my_ram.Rows[address_reg].Cells["Hex"].Value = Convert.ToString(REG_AC);
+            my_ram.Rows[address_reg].Cells["Hex"].Value = Convert.ToString(REG_AC, 16);
             REG_SC = 0;
             return REG_AC;
         }
@@ -91,7 +98,7 @@ namespace BasicCompiuter
 
         public static ushort BSA(ushort address_reg, DataGridView my_ram)
         {
-            my_ram.Rows[address_reg].Cells["Hex"].Value = Convert.ToString(REG_PC);
+            my_ram.Rows[address_reg].Cells["Hex"].Value = Convert.ToString(REG_PC, 16);
             REG_AR += 1;
             REG_PC = REG_AR;
             REG_SC = 0;
@@ -102,11 +109,11 @@ namespace BasicCompiuter
         public static ushort ISZ(ushort address_reg, DataGridView my_ram)
         {
             DataGridViewRow selected_row = my_ram.Rows[address_reg];
-            REG_DR = Convert.ToUInt16(selected_row.Cells["Hex"].Value.ToString());
+            REG_DR = Convert.ToUInt16(selected_row.Cells["Hex"].Value.ToString(), 16);
 
             REG_DR += 1;
 
-            my_ram.Rows[address_reg].Cells["Hex"].Value = Convert.ToString(REG_DR);
+            my_ram.Rows[address_reg].Cells["Hex"].Value = Convert.ToString(REG_DR, 16);
 
             REG_SC = 0;
 
