@@ -21,7 +21,8 @@ namespace BasicCompiuter
 
         private IDictionary<string, string> Variables = new Dictionary<string, string>();
         private IDictionary<string, int> Variables_address = new Dictionary<string, int>();
-
+        private uint step_level = 0;
+        private uint start_step = 0;
         private string[] command_array;
 
         private void Form1_Load(object sender, EventArgs e)
@@ -226,6 +227,10 @@ namespace BasicCompiuter
                     string hex_value = command[1];
                     int decValue = Convert.ToInt32(hex_value, 16);
                     RegistersClass.REG_PC = (ushort)decValue;
+                    start_step = (uint)(decValue);
+                    step_level = 0;
+                    datagrid_ram.Rows[(int)start_step].Selected = true;
+
                     if (!Find_variables())
                     {
                         MessageBox.Show("Syntax Error !!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -383,6 +388,15 @@ namespace BasicCompiuter
                 else if (command[0] == "STA")
                 {
 
+                    string var_name = command[1];
+                    RegistersClass.REG_AR = (ushort)Variables_address[var_name];
+                    Variables[var_name] = Convert.ToString(RegistersClass.REG_AC);
+                    RamInstructions.STA(RegistersClass.REG_AR, datagrid_ram);
+                    string var_address_hex = Convert.ToString(Variables_address[var_name], 16);
+
+                    datagrid_ram.Rows[RegInstructions.REG_PC].Cells["HEX"].Value = RamInstructions.STA_code + var_address_hex;
+                    datagrid_ram.Rows[RegInstructions.REG_PC].Cells["Instruction"].Value = line_v2;
+
                 }
                 else if (command[0] == "BUN")
                 {
@@ -395,24 +409,33 @@ namespace BasicCompiuter
                 else if (command[0] == "ISZ")
                 {
 
+                    string var_name = command[1];
+                    RegistersClass.REG_AR = (ushort)Variables_address[var_name];
+                    short reg_variable_v1 =Convert.ToInt16(Variables[var_name]);
+                    ushort reg_variable = (ushort)reg_variable_v1;
+                    reg_variable += 1;
+                    Variables[var_name] = Convert.ToString(reg_variable);
+                    RamInstructions.ISZ(reg_variable, datagrid_ram);
+
                 }
                 else if (command.Length == 3)
                 {
                     string variable_key = command[0];
                     string variable_base = command[1];
-                    string variable_value = command[2];
+                    string variable_value = Variables[variable_key];// base 10
                     string variable_value_hex;
-                    if (variable_base == "HEX")
-                    {
-                        //int base_10 = Convert.ToInt16(variable_value, 16);
-                        // variable_value = Convert.ToString(base_10);
+                    //if (variable_base == "HEX")
+                    //{
+                        int base_10 = Convert.ToInt16(variable_value);
+                        base_10 = (ushort)base_10;
+                        variable_value = Convert.ToString(base_10, 16);
                         variable_value_hex = variable_value;
-                    }
-                    else
-                    {
-                        short var_int = Convert.ToInt16(variable_value);
-                        variable_value_hex = Convert.ToString(var_int, 16);
-                    }
+                    //}
+                   // else
+                   // {
+                    //    short var_int = Convert.ToInt16(variable_value);
+                     //   variable_value_hex = Convert.ToString(var_int, 16);
+                    //}
                     datagrid_ram.Rows[RegInstructions.REG_PC].Cells["HEX"].Value = variable_value_hex;
                     datagrid_ram.Rows[RegInstructions.REG_PC].Cells["Instruction"].Value = variable_base+" "+variable_value;
                     datagrid_ram.Rows[RegInstructions.REG_PC].Cells["Label"].Value = variable_key;
@@ -461,21 +484,33 @@ namespace BasicCompiuter
                     string line = command_array[index];
                     line = line.Replace(",", "").Replace("\n", "").Replace("\r", "");
 
-                    string[] line_array = line.Split(' ');
+                    if (line.Contains("HEX") || line.Contains("DEC"))
+                   {
 
-                    string variable_key = line_array[0];
-                    string variable_base = line_array[1];
-                    string variable_value = line_array[2];
-                    if (variable_base == "HEX")
-                    {
-                        int base_10 = Convert.ToInt16(variable_value, 16);
-                        variable_value = Convert.ToString(base_10);
+                            string[] line_array = line.Split(' ');
+
+
+                            string variable_key = line_array[0];
+                            string variable_base = line_array[1];
+                            string variable_value = line_array[2];
+                            if (variable_base == "HEX")
+                            {
+                                int base_10 = Convert.ToInt16(variable_value, 16);
+                                variable_value = Convert.ToString(base_10);
+                            }
+
+                            Variables.Add(variable_key, variable_value);
+                            Variables_address.Add(variable_key, index + RegistersClass.REG_PC);
+                            //command_array[index] = variable_base + " " + variable_value;
+
                     }
+                        else
+                        {
+                            string[] line_array = line.Split(' ');
+                            string variable_key = line_array[0];
+                            Variables_address.Add(variable_key, index + RegistersClass.REG_PC);
 
-                    Variables.Add(variable_key, variable_value);
-                    Variables_address.Add(variable_key, index + RegistersClass.REG_PC);
-                    //command_array[index] = variable_base + " " + variable_value;
-
+                        }
 
                 }
 
@@ -556,6 +591,292 @@ namespace BasicCompiuter
         private void Btn_reset_Click(object sender, EventArgs e)
         {
             reset();
+        }
+
+        private void Btn_next_step_Click(object sender, EventArgs e)
+        {
+            if (start_step == 0)
+            {
+                RegistersClass.REG_SC = 0; // 4 bit
+                RegistersClass.REG_AC = 0; // 16 bit // i should cast to short when use it.
+                RegistersClass.REG_DR = 0; // 16 bit // i should cast to short when use it.
+                RegistersClass.REG_AR = 0; // 12 bit
+                RegistersClass.REG_IR = 0; // 16 bit 
+                RegistersClass.REG_PC = 0; // 12 bit 
+                RegistersClass.REG_TR = 0; // 16 bit // i should cast to short when use it.
+                RegistersClass.REG_INPR = 0; // 8 bit  // i should cast to short when use it.?
+                RegistersClass.REG_OUTR = 0; // 8 bit  // i should cast to short when use it.?
+                RegistersClass.REG_E = 0; // 1 bit
+                RegistersClass.REG_S = 0; // 1 bit
+                RegistersClass.REG_I = 0; // 1 bit
+                RegistersClass.REG_R = 0; // 1 bit
+                RegistersClass.REG_IEN = 0; // 1 bit
+                RegistersClass.REG_FGI = 0; // 1 bit
+                RegistersClass.REG_FGO = 0;
+            }
+
+            string line = command_array[step_level];
+
+            Console.WriteLine(line);
+
+            RegistersClass.REG_PC += 1;
+
+            Console.WriteLine(line);
+
+            if (line == "")
+                return;
+
+            if (line[0] == '/' && line[1] == '/')//comment :)
+            {
+                RegistersClass.REG_PC -= 1;
+                return;
+            }
+
+            string line_v2 = line.Replace("\n", "").Replace("\r", "").Replace(",", "");
+            string[] command = line_v2.Split(' ');
+
+            if (command[0] == "ORG")//my code must start with ORG :)
+            {
+                string hex_value = command[1];
+                int decValue = Convert.ToInt32(hex_value, 16);
+                RegistersClass.REG_PC = (ushort)decValue;
+                start_step = (uint)(decValue);
+                step_level = 0;
+                /*if (!Find_variables())
+                {
+                    MessageBox.Show("Syntax Error !!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }*/
+
+            }
+            else if (command[0] == "CLA")
+            {
+                RegInstructions.CLA_instruction();
+                datagrid_ram.Rows[RegInstructions.REG_PC].Cells["HEX"].Value = RegInstructions.CLA_code;
+                datagrid_ram.Rows[RegInstructions.REG_PC].Cells["Instruction"].Value = line_v2;
+
+
+            }
+            else if (command[0] == "CLE")
+            {
+                RegInstructions.CLE_instruction();
+
+                datagrid_ram.Rows[RegInstructions.REG_PC].Cells["HEX"].Value = RegInstructions.CLE_code;
+                datagrid_ram.Rows[RegInstructions.REG_PC].Cells["Instruction"].Value = line_v2;
+
+            }
+
+            else if (command[0] == "CMA")
+            {
+                RegInstructions.CMA_instruction();
+
+                datagrid_ram.Rows[RegInstructions.REG_PC].Cells["HEX"].Value = RegInstructions.CMA_code;
+                datagrid_ram.Rows[RegInstructions.REG_PC].Cells["Instruction"].Value = line_v2;
+            }
+
+            else if (command[0] == "CME")
+            {
+                RegInstructions.CME_instruction();
+
+                datagrid_ram.Rows[RegInstructions.REG_PC].Cells["HEX"].Value = RegInstructions.CME_code;
+                datagrid_ram.Rows[RegInstructions.REG_PC].Cells["Instruction"].Value = line_v2;
+            }
+
+            else if (command[0] == "CIR")
+            {
+                RegInstructions.CIR_instruction();
+
+                datagrid_ram.Rows[RegInstructions.REG_PC].Cells["HEX"].Value = RegInstructions.CIR_code;
+                datagrid_ram.Rows[RegInstructions.REG_PC].Cells["Instruction"].Value = line_v2;
+            }
+
+
+            else if (command[0] == "CIL")
+            {
+                RegInstructions.CIL_instruction();
+
+                datagrid_ram.Rows[RegInstructions.REG_PC].Cells["HEX"].Value = RegInstructions.CIL_code;
+                datagrid_ram.Rows[RegInstructions.REG_PC].Cells["Instruction"].Value = line_v2;
+            }
+
+
+            else if (command[0] == "INC")
+            {
+                RegInstructions.INC_instruction();
+
+                datagrid_ram.Rows[RegInstructions.REG_PC].Cells["HEX"].Value = RegInstructions.INC_code;
+                datagrid_ram.Rows[RegInstructions.REG_PC].Cells["Instruction"].Value = line_v2;
+            }
+
+            else if (command[0] == "SPA")
+            {
+                RegInstructions.SPA_instruction();
+
+                datagrid_ram.Rows[RegInstructions.REG_PC].Cells["HEX"].Value = RegInstructions.SPA_code;
+                datagrid_ram.Rows[RegInstructions.REG_PC].Cells["Instruction"].Value = line_v2;
+            }
+
+
+            else if (command[0] == "SNA")
+            {
+                RegInstructions.SNA_instruction();
+
+                datagrid_ram.Rows[RegInstructions.REG_PC].Cells["HEX"].Value = RegInstructions.SNA_code;
+                datagrid_ram.Rows[RegInstructions.REG_PC].Cells["Instruction"].Value = line_v2;
+            }
+
+
+            else if (command[0] == "SZA")
+            {
+                RegInstructions.SZA_instruction();
+
+                datagrid_ram.Rows[RegInstructions.REG_PC].Cells["HEX"].Value = RegInstructions.SZA_code;
+                datagrid_ram.Rows[RegInstructions.REG_PC].Cells["Instruction"].Value = line_v2;
+            }
+
+
+            else if (command[0] == "SZE")
+            {
+                RegInstructions.SZE_instruction();
+
+
+                datagrid_ram.Rows[RegInstructions.REG_PC].Cells["HEX"].Value = RegInstructions.SZE_code;
+                datagrid_ram.Rows[RegInstructions.REG_PC].Cells["Instruction"].Value = line_v2;
+            }
+
+
+            else if (command[0] == "HLT")
+            {
+                RegInstructions.HLT_instruction();
+
+
+                datagrid_ram.Rows[RegInstructions.REG_PC].Cells["HEX"].Value = RegInstructions.HLT_code;
+                datagrid_ram.Rows[RegInstructions.REG_PC].Cells["Instruction"].Value = line_v2;
+            }
+
+            else if (command[0] == "AND")
+            {
+                string var_name = command[1];
+                RegistersClass.REG_AR = (ushort)Variables_address[var_name];
+                short reg_value_un = Convert.ToInt16(Variables[var_name]);
+                ushort reg_value = (ushort)reg_value_un;
+
+                RamInstructions.AND(reg_value, datagrid_ram);
+                string var_address_hex = Convert.ToString(Variables_address[var_name], 16);
+
+                datagrid_ram.Rows[RegInstructions.REG_PC].Cells["HEX"].Value = RamInstructions.AND_code + var_address_hex;
+                datagrid_ram.Rows[RegInstructions.REG_PC].Cells["Instruction"].Value = line_v2;
+
+            }
+            else if (command[0] == "ADD")
+            {
+
+                string var_name = command[1];
+                RegistersClass.REG_AR = (ushort)Variables_address[var_name];
+                short reg_value_un = Convert.ToInt16(Variables[var_name]);
+                ushort reg_value = (ushort)reg_value_un;
+                RamInstructions.ADD(reg_value, datagrid_ram);
+                string var_address_hex = Convert.ToString(Variables_address[var_name], 16);
+
+                datagrid_ram.Rows[RegInstructions.REG_PC].Cells["HEX"].Value = RamInstructions.ADD_code + var_address_hex;
+                datagrid_ram.Rows[RegInstructions.REG_PC].Cells["Instruction"].Value = line_v2;
+
+            }
+            else if (command[0] == "LDA")
+            {
+
+                string var_name = command[1];
+                RegistersClass.REG_AR = (ushort)Variables_address[var_name];
+                short reg_value_un = Convert.ToInt16(Variables[var_name]);
+                ushort reg_value = (ushort)reg_value_un;
+                RamInstructions.LDA(reg_value, datagrid_ram);
+                string var_address_hex = Convert.ToString(Variables_address[var_name], 16);
+
+                datagrid_ram.Rows[RegInstructions.REG_PC].Cells["HEX"].Value = RamInstructions.LDA_code + var_address_hex;
+                datagrid_ram.Rows[RegInstructions.REG_PC].Cells["Instruction"].Value = line_v2;
+
+            }
+            else if (command[0] == "STA")
+            {
+
+                string var_name = command[1];
+                RegistersClass.REG_AR = (ushort)Variables_address[var_name];
+                Variables[var_name] = Convert.ToString(RegistersClass.REG_AC);
+                RamInstructions.STA(RegistersClass.REG_AR, datagrid_ram);
+                string var_address_hex = Convert.ToString(Variables_address[var_name], 16);
+
+                datagrid_ram.Rows[RegInstructions.REG_PC].Cells["HEX"].Value = RamInstructions.STA_code + var_address_hex;
+                datagrid_ram.Rows[RegInstructions.REG_PC].Cells["Instruction"].Value = line_v2;
+
+            }
+            else if (command[0] == "BUN")
+            {
+
+            }
+            else if (command[0] == "BSA")
+            {
+
+            }
+            else if (command[0] == "ISZ")
+            {
+
+                string var_name = command[1];
+                RegistersClass.REG_AR = (ushort)Variables_address[var_name];
+                short reg_variable_v1 = Convert.ToInt16(Variables[var_name]);
+                ushort reg_variable = (ushort)reg_variable_v1;
+                reg_variable += 1;
+                Variables[var_name] = Convert.ToString(reg_variable);
+                RamInstructions.ISZ(reg_variable, datagrid_ram);
+
+            }
+            else if (command.Length == 3)
+            {
+                string variable_key = command[0];
+                string variable_base = command[1];
+                string variable_value = Variables[variable_key];// base 10
+                string variable_value_hex;
+                //if (variable_base == "HEX")
+                //{
+                int base_10 = Convert.ToInt16(variable_value);
+                base_10 = (ushort)base_10;
+                variable_value = Convert.ToString(base_10, 16);
+                variable_value_hex = variable_value;
+                //}
+                // else
+                // {
+                //    short var_int = Convert.ToInt16(variable_value);
+                //   variable_value_hex = Convert.ToString(var_int, 16);
+                //}
+                datagrid_ram.Rows[RegInstructions.REG_PC].Cells["HEX"].Value = variable_value_hex;
+                datagrid_ram.Rows[RegInstructions.REG_PC].Cells["Instruction"].Value = variable_base + " " + variable_value;
+                datagrid_ram.Rows[RegInstructions.REG_PC].Cells["Label"].Value = variable_key;
+
+            }
+
+            else if (command[0] == "END")
+            {
+
+
+                MessageBox.Show("End :))", "GOOD :)", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                step_level = 0;
+                datagrid_ram.Rows[(int)step_level + (int)start_step].Selected = false;
+                return;
+            }
+
+            /*else
+            {
+                MessageBox.Show("Syntax Error !!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                
+            }*/
+
+            Update_register_values();
+
+            ////////////////////////////////////////////////////////////////////////////
+            datagrid_ram.Rows[(int)step_level + (int)start_step].Selected = false;
+
+            datagrid_ram.Rows[(int)step_level + (int)start_step + 1].Selected = true;
+            step_level++;
+
         }
     }
 }

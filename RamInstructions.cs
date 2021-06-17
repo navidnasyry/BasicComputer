@@ -106,18 +106,20 @@ namespace BasicCompiuter
         }
 
 
-        public static ushort ISZ(ushort address_reg, DataGridView my_ram)
+        public static ushort ISZ(ushort reg_variable, DataGridView my_ram)
         {
-            DataGridViewRow selected_row = my_ram.Rows[address_reg];
-            REG_DR = Convert.ToUInt16(selected_row.Cells["Hex"].Value.ToString(), 16);
+            //DataGridViewRow selected_row = my_ram.Rows[reg_varia];
+            //REG_DR = Convert.ToUInt16(selected_row.Cells["Hex"].Value.ToString(), 16);
+            REG_DR = reg_variable;
 
-            REG_DR += 1;
+            
+            if (reg_variable == 0)
+            {
+                REG_PC += 1;
 
-            my_ram.Rows[address_reg].Cells["Hex"].Value = Convert.ToString(REG_DR, 16);
-
+            }
             REG_SC = 0;
 
-            REG_PC += 1;
 
             return REG_PC;
 

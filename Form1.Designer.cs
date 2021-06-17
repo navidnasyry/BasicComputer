@@ -44,6 +44,10 @@
             this.lbl_current_file_name = new System.Windows.Forms.Label();
             this.loadFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.datagrid_ram = new System.Windows.Forms.DataGridView();
+            this.Label = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Address = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Instruction = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Hex = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lbl_ram = new System.Windows.Forms.Label();
             this.lbl_SC = new System.Windows.Forms.Label();
             this.txt_SC = new System.Windows.Forms.TextBox();
@@ -84,10 +88,6 @@
             this.txt_input = new System.Windows.Forms.TextBox();
             this.lbl_input = new System.Windows.Forms.Label();
             this.form1BindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.Label = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Address = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Instruction = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Hex = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.datagrid_ram)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.form1BindingSource)).BeginInit();
@@ -208,6 +208,30 @@
             this.datagrid_ram.Size = new System.Drawing.Size(575, 703);
             this.datagrid_ram.TabIndex = 6;
             this.datagrid_ram.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView1_CellContentClick);
+            // 
+            // Label
+            // 
+            this.Label.HeaderText = "Label";
+            this.Label.Name = "Label";
+            this.Label.ReadOnly = true;
+            // 
+            // Address
+            // 
+            this.Address.HeaderText = "Address";
+            this.Address.Name = "Address";
+            this.Address.ReadOnly = true;
+            // 
+            // Instruction
+            // 
+            this.Instruction.HeaderText = "Instruction";
+            this.Instruction.Name = "Instruction";
+            this.Instruction.ReadOnly = true;
+            // 
+            // Hex
+            // 
+            this.Hex.HeaderText = "Hex";
+            this.Hex.Name = "Hex";
+            this.Hex.ReadOnly = true;
             // 
             // lbl_ram
             // 
@@ -509,6 +533,7 @@
             this.btn_next_step.TabIndex = 43;
             this.btn_next_step.Text = "Next Step";
             this.btn_next_step.UseVisualStyleBackColor = true;
+            this.btn_next_step.Click += new System.EventHandler(this.Btn_next_step_Click);
             // 
             // btn_compile
             // 
@@ -550,30 +575,6 @@
             // form1BindingSource
             // 
             this.form1BindingSource.DataSource = typeof(BasicCompiuter.Form1);
-            // 
-            // Label
-            // 
-            this.Label.HeaderText = "Label";
-            this.Label.Name = "Label";
-            this.Label.ReadOnly = true;
-            // 
-            // Address
-            // 
-            this.Address.HeaderText = "Address";
-            this.Address.Name = "Address";
-            this.Address.ReadOnly = true;
-            // 
-            // Instruction
-            // 
-            this.Instruction.HeaderText = "Instruction";
-            this.Instruction.Name = "Instruction";
-            this.Instruction.ReadOnly = true;
-            // 
-            // Hex
-            // 
-            this.Hex.HeaderText = "Hex";
-            this.Hex.Name = "Hex";
-            this.Hex.ReadOnly = true;
             // 
             // Form1
             // 
