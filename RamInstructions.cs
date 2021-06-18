@@ -99,8 +99,9 @@ namespace BasicCompiuter
         public static ushort BSA(ushort address_reg, DataGridView my_ram)
         {
             my_ram.Rows[address_reg].Cells["Hex"].Value = Convert.ToString(REG_PC, 16);
-            REG_AR += 1;
+            //REG_AR = 1;
             REG_PC = REG_AR;
+            REG_PC++;
             REG_SC = 0;
             return REG_PC;
         }

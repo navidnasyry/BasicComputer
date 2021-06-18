@@ -398,8 +398,13 @@ namespace BasicCompiuter
                     datagrid_ram.Rows[RegInstructions.REG_PC].Cells["Instruction"].Value = line_v2;
 
                 }
-                else if (command[0] == "BUN")
+                else if (command[0] == "BUN")// BUN (HEX Address)
                 {
+                    string hex_addr = command[1];
+                    short dec_addr = Convert.ToInt16(hex_addr, 16);
+                    ushort address = (ushort)dec_addr;
+                    RamInstructions.BSA(address, datagrid_ram);
+                    
 
                 }
                 else if (command[0] == "BSA")
@@ -811,10 +816,19 @@ namespace BasicCompiuter
             }
             else if (command[0] == "BUN")
             {
+                string hex_addr = command[1];
+                short dec_addr = Convert.ToInt16(hex_addr, 16);
+                ushort address = (ushort)dec_addr;
+                RamInstructions.BUN(address, datagrid_ram);
+                step_level = (uint)dec_addr - (uint)start_step;
 
             }
             else if (command[0] == "BSA")
             {
+                string hex_addr = command[1];
+                short dec_addr = Convert.ToInt16(hex_addr, 16);
+                ushort address = (ushort)dec_addr;
+                RamInstructions.BSA(address, datagrid_ram);
 
             }
             else if (command[0] == "ISZ")
@@ -856,10 +870,14 @@ namespace BasicCompiuter
             else if (command[0] == "END")
             {
 
-
-                MessageBox.Show("End :))", "GOOD :)", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 step_level = 0;
                 datagrid_ram.Rows[(int)step_level + (int)start_step].Selected = false;
+                datagrid_ram.Rows[(int)step_level + (int)start_step + 1].Selected = false;
+                datagrid_ram.Rows[(int)step_level + (int)start_step - 1].Selected = false;
+
+                MessageBox.Show("End :))", "GOOD :)", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+
+
                 return;
             }
 
@@ -878,5 +896,7 @@ namespace BasicCompiuter
             step_level++;
 
         }
+
+
     }
 }
