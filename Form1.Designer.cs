@@ -562,6 +562,7 @@
             this.txt_input.Name = "txt_input";
             this.txt_input.Size = new System.Drawing.Size(359, 22);
             this.txt_input.TabIndex = 47;
+            this.txt_input.Text = "0";
             // 
             // lbl_input
             // 

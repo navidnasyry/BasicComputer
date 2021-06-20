@@ -91,6 +91,7 @@ namespace BasicCompiuter
         public static ushort BUN(ushort address_reg, DataGridView my_ram)
         {
             REG_SC = 0;
+            REG_AR = address_reg;
             REG_PC = address_reg;
             return REG_PC;
         }
