@@ -1,2 +1,2 @@
-# BasicComputer
-My Computer architecture project with C#
+# mano-simulator
+My Computer architecture project with C# that compiles assembly code...
