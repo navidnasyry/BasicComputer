@@ -908,6 +908,69 @@ namespace BasicCompiuter
                 RamInstructions.ISZ(reg_variable, datagrid_ram);
 
             }
+
+            else if (command[0] == "INP")
+            {
+                IOInstructions.INP();
+
+                datagrid_ram.Rows[RegInstructions.REG_PC].Cells["HEX"].Value = IOInstructions.INP_code;
+                datagrid_ram.Rows[RegInstructions.REG_PC].Cells["Instruction"].Value = line_v2;
+
+
+            }
+
+            else if (command[0] == "OUT")
+            {
+
+                IOInstructions.OUT();
+
+                datagrid_ram.Rows[RegInstructions.REG_PC].Cells["HEX"].Value = IOInstructions.OUT_code;
+                datagrid_ram.Rows[RegInstructions.REG_PC].Cells["Instruction"].Value = line_v2;
+
+
+            }
+            else if (command[0] == "SKI")
+            {
+
+                IOInstructions.SKI();
+
+                datagrid_ram.Rows[RegInstructions.REG_PC].Cells["HEX"].Value = IOInstructions.SKI_code;
+                datagrid_ram.Rows[RegInstructions.REG_PC].Cells["Instruction"].Value = line_v2;
+
+
+            }
+            else if (command[0] == "SKO")
+            {
+
+                IOInstructions.SKO();
+
+                datagrid_ram.Rows[RegInstructions.REG_PC].Cells["HEX"].Value = IOInstructions.SKO_code;
+                datagrid_ram.Rows[RegInstructions.REG_PC].Cells["Instruction"].Value = line_v2;
+
+
+            }
+            else if (command[0] == "ION")
+            {
+
+                IOInstructions.ION();
+
+                datagrid_ram.Rows[RegInstructions.REG_PC].Cells["HEX"].Value = IOInstructions.ION_code;
+                datagrid_ram.Rows[RegInstructions.REG_PC].Cells["Instruction"].Value = line_v2;
+
+
+            }
+            else if (command[0] == "IOF")
+            {
+
+                IOInstructions.IOF();
+
+                datagrid_ram.Rows[RegInstructions.REG_PC].Cells["HEX"].Value = IOInstructions.IOF_code;
+                datagrid_ram.Rows[RegInstructions.REG_PC].Cells["Instruction"].Value = line_v2;
+
+
+
+            }
+
             else if (command.Length == 3)
             {
                 string variable_key = command[0];
